@@ -1,15 +1,12 @@
 import React from 'react';
-import styles from './styles/app.module.less';
-import { hot } from 'react-hot-loader/root';
-
-console.log(styles);
+import './styles/app.less';
 
 function App() {
   return (
-    <div id='root' className={styles.root}>
+    <div id='root' className='root'>
       hello world! this is a react project
     </div>
   );
 }
 
-export default hot(App);
+export default App;

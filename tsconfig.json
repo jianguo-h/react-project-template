@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
     "allowJs": true,
-    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "es6",
     "strict": true,
     "module": "esnext",
     "sourceMap": true,
     "noImplicitAny": true,
-    "jsx": "preserve",
-    "baseUrl": "./",
+    "jsx": "react",
+    "baseUrl": ".",
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
@@ -19,10 +19,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "downlevelIteration": true,
+    "incremental": true,
     "paths": {
       "@src/*": ["src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "App.d.ts"],
   "exclude": ["node_modules"]
 }

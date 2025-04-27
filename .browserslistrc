@@ -1,0 +1,11 @@
+[production]
+> 5%
+not dead
+not op_mini all
+not ie <= 8
+last 5 versions
+
+[development]
+last 10 Chrome versions
+last 10 Firefox versions
+not dead

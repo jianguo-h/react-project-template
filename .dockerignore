@@ -1,0 +1,16 @@
+.git
+.log
+.gitignore
+.editorconfig*
+.env.development
+*.tsbuildinfo
+.lintstagedrc*
+.stylelintrc*
+.prettierrc*
+eslint.config*
+.husky
+node_modules
+*.md
+tsconfig.vite.json
+stats.html
+dist

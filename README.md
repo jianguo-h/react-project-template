@@ -8,7 +8,7 @@
 .
 ├── build                                       // build配置文件
 ├── src                                         // 源码
-│   ├── api                                     // 接口管理
+│   ├── apis                                    // 接口管理
 │   ├── components                              // 组件
 │   ├── styles                                  // 样式
 │   ├── store                                   // redux配置
@@ -17,27 +17,71 @@
 │   ├── static                                  // 静态资源
 │   ├── types                                   // typescript类型定义
 │   ├── App.tsx                                 // 根组件文件
-│   ├── index.tsx                               // 入口文件
+│── index.tsx                                   // 入口文件
 ├── index.html                                  // 模板html文件
 .
 ```
 
 ## Get Started
 
-Install [`node >= 21.1.0`](https://nodejs.org) and [`pnpm >= 10.9.0`](https://pnpm.io/)
+Install [`node >= 22.22.1`](https://nodejs.org)
 
 ## Development
 
+1. Create or update `.env.development` in the project **envs** directory:
+
 ```bash
-  # 1. enable pnpm
-  corepack enable pnpm
+VITE_DEV_SERVER_PORT=5000
+# VITE_ENABLE_DEV_API_PROXY=true
+```
 
-  2. add COREPACK_ENABLE_AUTO_PIN env to your env file(eg: /etc/profile)
-  export COREPACK_ENABLE_AUTO_PIN=0
+2. Enable pnpm (via corepack) and install dependencies:
 
-  # 3. Install packages
-  pnpm install
+```bash
+corepack prepare pnpm@latest --activate
+corepack enable pnpm
+pnpm install
+```
 
-  # Start dev server
-  4. pnpm start --port 3001
+3. Start dev server:
+
+```bash
+pnpm dev
+```
+
+## Build
+
+Pick **one** build target per deployment; do not mix SPA and single-spa output in the same `dist/`.
+
+### Nginx
+
+```bash
+export REACT_APP_API_URL=https://api.dev.msrestapi.com/po-plan/poplan/api
+pnpm install --prod --frozen-lockfile --ignore-scripts
+pnpm build
+
+# Copy the output to the nginx html folder
+cp -r dist/ /nginx/html/
+```
+
+### Docker
+
+The example below builds the **SPA** target. To build the single-spa micro-frontend instead, replace `pnpm build`.
+
+```dockerfile
+FROM node:lts-alpine AS builder
+
+ENV REACT_APP_API_URL=/api
+
+WORKDIR /app
+COPY package.json pnpm-lock.yaml /app/
+COPY . /app
+RUN corepack enable pnpm && \
+  pnpm install --prod --frozen-lockfile --ignore-scripts && \
+  pnpm build
+
+
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+EXPOSE 80
 ```

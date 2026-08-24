@@ -1,10 +1,14 @@
 import type { UserConfig } from 'vite';
 import reactPlugin from '@vitejs/plugin-react';
 import path from 'path';
+import tailwindcss from '@tailwindcss/vite';
+
+const projectRoot = path.resolve(import.meta.dirname, '../');
 
 const baseConfig: UserConfig = {
   base: '/',
-  envPrefix: ['NODE_ENV', 'REACT_'],
+  envDir: path.resolve(projectRoot, 'envs'),
+  envPrefix: ['VITE_', 'REACT_APP_'],
   resolve: {
     extensions: [
       '.js',
@@ -21,10 +25,10 @@ const baseConfig: UserConfig = {
       '.mtsx',
     ],
     alias: {
-      '@src': path.resolve(__dirname, '../src'),
+      '@': projectRoot,
     },
   },
-  plugins: [reactPlugin()],
+  plugins: [reactPlugin(), tailwindcss()],
 };
 
 export default baseConfig;

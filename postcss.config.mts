@@ -1,10 +1,9 @@
-// @ts-check
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
+import { type Config } from 'postcss-load-config';
 
 /**
  * @see https://vite.dev/guide/features.html#postcss
- * @type {import('postcss-load-config').Config}
  */
 export default {
   plugins: [
@@ -13,4 +12,4 @@ export default {
       preset: 'default',
     }),
   ],
-};
+} satisfies Config;

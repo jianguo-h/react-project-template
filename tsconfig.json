@@ -1,29 +1,39 @@
 {
   "compilerOptions": {
+    "target": "ES2015",
+    "useDefineForClassFields": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
     "allowJs": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "target": "es6",
-    "strict": true,
-    "module": "esnext",
-    "sourceMap": true,
-    "noImplicitAny": true,
-    "jsx": "react",
-    "baseUrl": ".",
-    "esModuleInterop": true,
+    "checkJs": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true,
+    "incremental": true,
+    "esModuleInterop": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "downlevelIteration": true,
-    "incremental": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Path mapping */
     "paths": {
-      "@src/*": ["src/*"]
+      "@/*": ["./*"]
     }
   },
-  "include": ["src", "App.d.ts"],
-  "exclude": ["node_modules"]
+  "include": ["src", "build", "tests"],
+  "exclude": ["node_modules", "dist", "public", "coverage"]
 }
